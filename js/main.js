@@ -465,10 +465,10 @@ function updateHeroDimensions() {
 
   // console.log("top: "+rect.top+" , bottom: "+rect.bottom+" , left: "+rect.left+" , right "+rect.right);
 
-  TLspan.innerHTML = '(' + heroTop + ',' + heroLeft + ')';
-  BLspan.innerHTML = '(' + heroBottom + ',' + heroLeft + ')';
-  TRspan.innerHTML = '(' + heroTop + ',' + heroRight + ')';
-  BRspan.innerHTML = '(' + heroBottom + ',' + heroRight + ')';
+  TLspan.innerHTML = '(' + heroLeft + ',' + heroTop + ')';
+  BLspan.innerHTML = '(' + heroLeft + ',' + heroBottom + ')';
+  TRspan.innerHTML = '(' + heroRight + ',' + heroTop + ')';
+  BRspan.innerHTML = '(' + heroRight + ',' + heroBottom + ')';
 }
 
 document.addEventListener('scroll', updateHeroDimensions);
