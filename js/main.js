@@ -447,25 +447,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // G4 Added 052825
-// ---- Update Element Height and Width Data in Hero Section
+// G4 Modified 062825
+// ---- Update Element Corner Data in Hero Section
 // 
 let heroElement = document.getElementById("heroSection");
-let heightSpan = document.getElementById("heightSpan");
-let widthSpan = document.getElementById("widthSpan");
-
-
+let TLspan = document.getElementById("TLSpan");
+let BLspan = document.getElementById("BLSpan");
+let TRspan = document.getElementById("TRSpan");
+let BRspan = document.getElementById("BRSpan");
 
 function updateHeroDimensions() {
   let rect = heroElement.getBoundingClientRect();
-  // let heroHeight = heroElement.offsetHeight;
-  // let heroWidth = heroElement.clientWidth;
-  let heroHeight = rect.bottom;
-  let heroWidth = rect.right;
+  let heroTop = rect.top.toFixed(2);
+  let heroBottom = rect.bottom.toFixed(2);
+  let heroRight = rect.right.toFixed(2);
+  let heroLeft = rect.left.toFixed(2);
 
   // console.log("top: "+rect.top+" , bottom: "+rect.bottom+" , left: "+rect.left+" , right "+rect.right);
 
-  heightSpan.innerHTML = heroHeight.toFixed(2).toString();
-  widthSpan.innerHTML = heroWidth.toFixed(2).toString();
+  TLspan.innerHTML = '(' + heroTop + ',' + heroLeft + ')';
+  BLspan.innerHTML = '(' + heroBottom + ',' + heroLeft + ')';
+  TRspan.innerHTML = '(' + heroTop + ',' + heroRight + ')';
+  BRspan.innerHTML = '(' + heroBottom + ',' + heroRight + ')';
 }
 
 document.addEventListener('scroll', updateHeroDimensions);
