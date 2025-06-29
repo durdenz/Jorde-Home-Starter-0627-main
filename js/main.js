@@ -7,6 +7,17 @@ import { handleScroll, updatePosition } from '../js/positionAlongPathTools/Posit
 import { loadCurveFromJSON } from '../js/curveTools/CurveMethods.js'
 import { setupRenderer } from '../js/helpers/RendererHelper.js'
 
+// G4 062925 Integrated
+// Force Window to reset to position (0,0) on reload
+window.addEventListener('load', (event) => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
+});
+// 062925 - End Of Changes
+
 //Open/Close Menu On Click
 let menuState = 0; //0 = Closed
 
