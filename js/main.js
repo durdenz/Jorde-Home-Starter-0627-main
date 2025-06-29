@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { LoadGLTFByPath } from '../js/helpers/ModelHelper.js'
+import { LoadGLBByPath } from '../js/helpers/ModelHelper.js'
+import { getMixer } from '../js/helpers/ModelHelper.js' // G4 062925 Added for Animation
 import PositionAlongPathState from '../js/positionAlongPathTools/PositionAlongPathState.js';
 import { handleScroll, updatePosition } from '../js/positionAlongPathTools/PositionAlongPathMethods.js'
 import { loadCurveFromJSON } from '../js/curveTools/CurveMethods.js'
@@ -252,7 +254,8 @@ async function setupScene() {
 	//Scene is container for objects, cameras, and lights
 	const scene = new THREE.Scene();
 
-	await LoadGLTFByPath(scene, startingModelPath);
+  await LoadGLBByPath(scene, startingModelPath); // G4 062925 Integrate Animtion
+	let mixer = getMixer(); // G4 062925 Integrate Animtion
 
 	let curvePath = await loadCurveFromJSON(scene, curvePathJSON);
 
@@ -280,19 +283,32 @@ async function setupScene() {
 
 	function onMouseScroll(event){
 		if(SplineCanvas.getBoundingClientRect().top <= 0) {
-			console.log(`MouseScroll: SplineCanvas.top = ${SplineCanvas.getBoundingClientRect().top}`);
+			// console.log(`MouseScroll: SplineCanvas.top = ${SplineCanvas.getBoundingClientRect().top}`);
 			handleScroll(event, positionAlongPathState);
 		}
 	}
   // G4 062925 End of Changes
 
+  // 062925 - G4 Beginning of Changes for Animation
+	const clock = new THREE.Clock();
+	// 062925 - G4 End of Changes for Animation
+
 	// Animate the scene
 	function animate() {
 		requestAnimationFrame(animate);
 		updatePosition(curvePath, camera, positionAlongPathState);
+    // 062925 - G4 Beginning of Changes for Animation
+		if(mixer) {
+        	mixer.update(clock.getDelta());
+		}
+		// 062925 - G4 End of Changes for Animation
 		renderer.render(scene, camera);
 	}
 	animate();
+
+  // 062925 - G4 Beginning of Changes for Animation
+	renderer.setAnimationLoop(animate);
+  // 062925 - G4 End of Changes for Animation
 
 
 // Spline Path Follow Code Ends Here
@@ -301,6 +317,7 @@ async function setupScene() {
 
   // GD5 Added handleWindowResize and Event Listener 053125 
   //
+  
   function handleWindowResize () {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -311,25 +328,6 @@ async function setupScene() {
 
 
 };
-
-
-
-// // Pin Section During Scroll Home Page Spline
-// // ==============================================
-
-// // Get the offset position of the navbar
-// var navHeight = $('.section5')[0].scrollHeight
-// var sidebar = $(".section5")[0]
-
-// // When the user scrolls the page, make the sidebar sticky
-// window.onscroll = function() {
-//   if (window.pageYOffset >= navHeight) {
-//     sidebar.classList.add("sticky")
-//   } else {
-//     sidebar.classList.remove("sticky");
-//   }
-// };
-
 
 
 // // Lottie Animation Arrow
