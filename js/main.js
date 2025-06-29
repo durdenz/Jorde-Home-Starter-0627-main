@@ -6,6 +6,7 @@ import PositionAlongPathState from '../js/positionAlongPathTools/PositionAlongPa
 import { handleScroll, updatePosition } from '../js/positionAlongPathTools/PositionAlongPathMethods.js'
 import { loadCurveFromJSON } from '../js/curveTools/CurveMethods.js'
 import { setupRenderer } from '../js/helpers/RendererHelper.js'
+import {IsMobile, IsTablet} from '../js/mobileCheck.js';
 
 // G4 062925 Integrated
 // Force Window to reset to position (0,0) on reload
@@ -17,6 +18,15 @@ window.addEventListener('load', (event) => {
   });
 });
 // 062925 - End Of Changes
+
+// Test for Mobile or Tablet Browser and update classes
+if (IsMobile) { 
+  console.log(`Mobile Browser Detected`);
+} else if (IsTablet) {
+  console.log(`Tablet Browser Detected`);
+} else {
+  console.log(`Desktop Browser Detected`);
+}
 
 //Open/Close Menu On Click
 let menuState = 0; //0 = Closed
