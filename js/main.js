@@ -241,8 +241,9 @@ splitTypes.forEach((char,i) => {
 // ==============================================
 // Spline Path Follow Code Starts Here
 
-const startingModelPath = '../models/Scene.glb'
-const curvePathJSON = '../models/curvePath.json'
+// G4 062925 Use new models for animation
+const startingModelPath = '../models/3DScene_TEST1.glb' // G4 062925 Added for Animation
+const curvePathJSON = '../models/SplinePath_TEST1.json' // G4 062925 Added for Animation
 
 setupScene();
 
@@ -270,11 +271,20 @@ async function setupScene() {
 
 	let positionAlongPathState = new PositionAlongPathState();
 
+  // G4 062925 Integrated Code to isolate scroll thru scene to when top of canvas reaches top of viewport
+
+  // Setup Event Listener for Scrolling inside canvas
+	let SplineCanvas = document.querySelector('#spline-path-canvas');
+
 	window.addEventListener('wheel', onMouseScroll, false);
 
 	function onMouseScroll(event){
-		handleScroll(event, positionAlongPathState);
+		if(SplineCanvas.getBoundingClientRect().top <= 0) {
+			console.log(`MouseScroll: SplineCanvas.top = ${SplineCanvas.getBoundingClientRect().top}`);
+			handleScroll(event, positionAlongPathState);
+		}
 	}
+  // G4 062925 End of Changes
 
 	// Animate the scene
 	function animate() {
