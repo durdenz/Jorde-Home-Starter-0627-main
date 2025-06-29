@@ -60,7 +60,7 @@ export const LoadGLBByPath = (scene, startingModelPath) => {
       // 062225 - G4 End of Changes for Animation
 
       resolve();
-    }, () => {console.log(`Resolved`)}, (error) => {
+    }, () => {}, (error) => {
       reject(error);
     });
   });
