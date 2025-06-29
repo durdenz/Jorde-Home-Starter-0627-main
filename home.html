@@ -128,7 +128,7 @@
     <main class="main">
         <section id="heroSection" class="section1">
             <canvas class="canvas3d" id="RapierCanvas"></canvas>
-            <div class="row d-flex fill-div" style="height: 100vh; margin: auto;">
+            <div class="row d-flex" style="height: 100vh; margin: auto;">
 
                 <div class="row justify-content-between heromarker"> 
                     <span id="TLSpan" class="hero-marker-left marker-space-t col-1">x , y</span> 
@@ -489,13 +489,15 @@
         {
             "imports": {
                 "three": "https://unpkg.com/three/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three/examples/jsm/"
+                "three/addons/": "https://unpkg.com/three/examples/jsm/",
+                "jsm/": "https://cdn.jsdelivr.net/npm/three@0.161/examples/jsm/"
             }
         }
     </script>
 
     <!-- Include custom JS for this app -->
     <script src="./js/main.js" type="module"></script>
+    <script src="./js/gravity.js" type="module"></script>
   
 </body>
 </html>
