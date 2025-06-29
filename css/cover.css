@@ -352,6 +352,12 @@ letter-spacing: -5px;
   font-family:'Roboto Mono', 'Arial Narrow', Arial, sans-serif;
 }
 
+/* Canvas for Rapier Demo in Hero */
+.canvas3d {
+  position: absolute;
+  z-index: -1;
+  background-color: lawngreen;
+}
 
 .card-title {
   text-align: left;
