@@ -13,7 +13,7 @@ window.addEventListener('load', (event) => {
   window.scrollTo({
     top: 0,
     left: 0,
-    behavior: 'smooth',
+    // behavior: 'smooth',
   });
 });
 // 062925 - End Of Changes
